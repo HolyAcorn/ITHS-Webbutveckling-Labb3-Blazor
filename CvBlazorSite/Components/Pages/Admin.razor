@@ -1,42 +1,71 @@
 ﻿@page "/Admin"
+@using CvBlazorSite.Models
+@inject HttpClient httpClient
 
-<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
-    <MudGrid>
-        <MudItem xs="12" sm="6" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="12" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6">
-            <MudGrid>
-                <MudItem xs="12">
-                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-                </MudItem>
-                <MudItem xs="12">
-                    <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-                </MudItem>
-            </MudGrid>
-        </MudItem>
-        <MudItem xs="12" sm="6">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 100%"></MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="6" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-        </MudItem>
-        <MudItem xs="12" sm="12" md="4">
-            <MudPaper Elevation="2" Class="pa-4" Style="height: 200px;"></MudPaper>
-        </MudItem>
-    </MudGrid>
-</MudContainer>
+@using Microsoft.AspNetCore.Authorization
+
+@attribute [Authorize(Roles = "Admin")]
+
+    <MudStack Row="true">
+        <MudButton Color="Color.Primary" Href="#">Back</MudButton>
+    </MudStack>
+
+    <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+        <MudGrid>
+            <MudItem xs="12" sm="6">
+                <MudPaper Elevation="2" Class="pa-4">
+                    <MudText Typo="Typo.h4">Projekt</MudText>
+                    <MudDataGrid T="Project" Items="@_projects" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingProjectItem"
+                                 EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
+                        <Columns>
+                            <PropertyColumn Property="p => p.Id"/>
+                            <PropertyColumn Property="p => p.Name"/>
+                            <PropertyColumn Property="p => p.Description"/>
+                            <PropertyColumn Property="p => p.Type"/>
+                            <PropertyColumn Property="p => p.Url"/>
+                            <TemplateColumn >
+                                <CellTemplate>
+                                    <MudIconButton OnClick="() => RemoveProjectItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
+                                    <MudIconButton OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
+                                </CellTemplate>
+                            </TemplateColumn>
+                        </Columns>
+                    </MudDataGrid>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12" sm="6">
+                <MudPaper Elevation="2" Class="pa-4"></MudPaper>
+            </MudItem>
+        </MudGrid>
+    </MudContainer>
 
 
 @code {
+    private IEnumerable<Competency> _competencies = new List<Competency>();
+    private IEnumerable<Project> _projects = new List<Project>();
+    
+
+    protected override async Task OnInitializedAsync()
+    {
+        _competencies = await httpClient.GetFromJsonAsync<List<Competency>>("api/competencies");
+        _projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+    }
+
+    private async Task RemoveProjectItem(Project project)
+    {
+        var respone = await httpClient.DeleteAsync($"api/project/{project.Id}");
+        _projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+    }
+
+
+    void CommitedEditingProjectItem(Project project)
+    {
+        var task = Task.Run(async () => await SendProjectPutRequest(project));
+    }
+
+    async Task SendProjectPutRequest(Project project)
+    {
+        var response = await httpClient.PutAsJsonAsync<Project>($"api/project/{project.Id}", project);
+    }
     
 }

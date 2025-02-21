@@ -1,11 +1,12 @@
 ﻿@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
 
-<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode" />
-<MudPopoverProvider />
-<MudDialogProvider />
-<MudSnackbarProvider />
+<MudThemeProvider Theme="@_theme" IsDarkMode="_isDarkMode"/>
+<MudPopoverProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 <MudLayout>
-    
+
     <!--
     <MudAppBar Elevation="1" Bottom="true">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
@@ -13,21 +14,34 @@
         <MudSpacer />
         <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle" />
         <MudIconButton Icon="@Icons.Material.Filled.MoreVert" Color="Color.Inherit" Edge="Edge.End" />
-    </MudAppBar>
+    </MudAppBar><
     <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Always" Elevation="2">
         <NavMenu />
     </MudDrawer>-->
     <MudMainContent Class="justify-center mt-16 pa-4">
-        
+
         @Body
-        
-        
+
+
         <MudStack Row="true" Justify="Justify.SpaceBetween">
-            <MudButton Href="Auth" Color="Color.Primary">Admin</MudButton>
+            <MudStack Row="true">
+
+                <MudButton Href="Admin" Color="Color.Primary">Admin</MudButton>
+                <AuthorizeView>
+                    <form action="Account/Logout" method="post">
+                        <AntiforgeryToken/>
+                        <input type="hidden" name="ReturnUrl" value="@currentUrl"/>
+                        <button type="submit" class="mud-nav-link mud-ripple">
+                            <MudText Color="Color.Primary">Logout</MudText>
+                        </button>
+                    </form>
+
+                </AuthorizeView>
+            </MudStack>
             <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
         </MudStack>
     </MudMainContent>
-    
+
 </MudLayout>
 
 
@@ -41,11 +55,16 @@
     private bool _drawerOpen = true;
     private bool _isDarkMode = true;
     private MudTheme? _theme = null;
-    
+
+
+    private string? currentUrl;
+
+
     protected override void OnInitialized()
     {
         base.OnInitialized();
-
+        currentUrl = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+        NavigationManager.LocationChanged += OnLocationChanged;
         _theme = new()
         {
             PaletteLight = _lightPalette,
@@ -53,11 +72,23 @@
             LayoutProperties = new LayoutProperties()
         };
     }
-    
+
+    private void OnLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = NavigationManager.ToBaseRelativePath(e.Location);
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        NavigationManager.LocationChanged -= OnLocationChanged;
+    }
+
     private void DrawerToggle()
     {
         _drawerOpen = !_drawerOpen;
     }
+
     private void DarkModeToggle()
     {
         _isDarkMode = !_isDarkMode;
@@ -107,6 +138,5 @@
         true => Icons.Material.Rounded.AutoMode,
         false => Icons.Material.Outlined.DarkMode,
     };
+
 }
-
-

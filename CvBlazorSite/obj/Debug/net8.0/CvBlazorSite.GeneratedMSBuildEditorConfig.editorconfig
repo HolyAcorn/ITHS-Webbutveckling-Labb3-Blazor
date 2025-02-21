@@ -187,12 +187,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xMYXlvdXRcTmF2TWVudS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Auth.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoLnJhem9y
+[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Admin.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBZG1pbi5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
-[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Counter.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xDb3VudGVyLnJhem9y
+[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Auth.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xBdXRoLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Error.razor]
@@ -201,10 +201,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
-build_metadata.AdditionalFiles.CssScope = 
-
-[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Weather.razor]
-build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xXZWF0aGVyLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Routes.razor]

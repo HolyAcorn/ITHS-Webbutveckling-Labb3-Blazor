@@ -158,3 +158,4 @@ V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\
 V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\CvBlazorSite.genruntimeconfig.cache
 V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\ref\CvBlazorSite.dll
 V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\BlazorAnimation.dll
+V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\CvBlazorSite.sourcelink.json
