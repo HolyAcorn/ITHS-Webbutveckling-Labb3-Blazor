@@ -1,0 +1,81 @@
+﻿@page "/"
+@using CvBlazorSite.Models
+@inject HttpClient httpClient
+
+<PageTitle>Home</PageTitle>
+
+<MudGrid Class="title" Justify="Justify.SpaceBetween">
+    <MudItem xs="8">
+        <MudText Class="TitleH1" Typo="Typo.h1" GutterBottom="true">VIKTOR</MudText>
+    </MudItem>
+    <MudItem>
+        <MudText Class="TitleH2" Color="Color.Secondary" Typo="Typo.h2" Align="Align.Right" GutterBottom="true">DEVOPS</MudText>
+    </MudItem>
+
+    <MudItem>
+        <MudText Class="TitleH2" Color="Color.Secondary" Typo="Typo.h2" GutterBottom="true">ENGINEER</MudText>
+    </MudItem>
+    <MudItem>
+        <MudText Class="TitleH1" Typo="Typo.h1" Align="Align.Right" GutterBottom="true">EDÉN</MudText>
+    </MudItem>
+</MudGrid>
+
+<MudPaper Class="siteBlock" Elevation="3">
+    <MudText Typo="Typo.h5">Kompetenser</MudText>
+    <MudSpacer/>
+    <MudDataGrid Items="@_competencies" Dense="true" Breakpoint="Breakpoint.None">
+        <Columns>
+            <PropertyColumn Property="x => x.Name"/>
+            <PropertyColumn Property="x => x.YearsOfExperience" Title="Antal år"/>
+            <PropertyColumn Property="x => x.CompetencyLevel" Title="Nivå"/>
+        </Columns>
+    </MudDataGrid>
+</MudPaper>
+
+
+<MudPaper Class="siteBlock" Style="margin-top: 4rem;" Elevation="3">
+    <MudText Typo="Typo.h5">Projekt</MudText>
+</MudPaper>
+
+<MudContainer Style="margin-top: 2rem;">
+
+    <MudGrid Justify="Justify.Center">
+        @foreach (Project project in _projects)
+        {
+            <MudItem xs="12" lg="5">
+                <MudCard Style="height: 100%">
+                    <MudCardHeader>
+                        <CardHeaderAvatar>
+                            <MudAvatar Variant="Variant.Outlined">
+                                <MudImage Src="@ProjectHelper.GetImagePath(project.Type)"/>
+                            </MudAvatar>
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5">@project.Name</MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <MudText Typo="Typo.body1">@project.Description</MudText>
+                    </MudCardContent>
+                    <MudCardActions>
+                        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@project.Url">Github</MudButton>
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>
+
+
+@code
+{
+    private IEnumerable<Competency> _competencies = new List<Competency>();
+    private IEnumerable<Project> _projects = new List<Project>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        _competencies = await httpClient.GetFromJsonAsync<List<Competency>>("api/competencies");
+        _projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+    }
+
+}
