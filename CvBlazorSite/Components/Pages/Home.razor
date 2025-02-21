@@ -35,7 +35,6 @@
 
 <MudPaper Class="siteBlock" Style="margin-top: 4rem;" Elevation="3">
     <MudText Typo="Typo.h5">Projekt</MudText>
-</MudPaper>
 
 <MudContainer Style="margin-top: 2rem;">
 
@@ -43,7 +42,7 @@
         @foreach (Project project in _projects)
         {
             <MudItem xs="12" lg="5">
-                <MudCard Style="height: 100%">
+                <MudCard Elevation="5" Style="height: 100%">
                     <MudCardHeader>
                         <CardHeaderAvatar>
                             <MudAvatar Variant="Variant.Outlined">
@@ -65,6 +64,7 @@
         }
     </MudGrid>
 </MudContainer>
+</MudPaper>
 
 
 @code
