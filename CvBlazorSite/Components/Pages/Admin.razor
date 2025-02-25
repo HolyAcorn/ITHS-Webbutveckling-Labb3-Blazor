@@ -1,71 +1,158 @@
 ﻿@page "/Admin"
+@using System.Collections.ObjectModel
 @using CvBlazorSite.Models
-@inject HttpClient httpClient
-
 @using Microsoft.AspNetCore.Authorization
+@using System.ComponentModel.DataAnnotations
+@inject HttpClient HttpClient
+@inject IDialogService DialogService
+
+
 
 @attribute [Authorize(Roles = "Admin")]
 
-    <MudStack Row="true">
-        <MudButton Color="Color.Primary" Href="#">Back</MudButton>
-    </MudStack>
 
-    <MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
-        <MudGrid>
-            <MudItem xs="12" sm="6">
-                <MudPaper Elevation="2" Class="pa-4">
-                    <MudText Typo="Typo.h4">Projekt</MudText>
-                    <MudDataGrid T="Project" Items="@_projects" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingProjectItem"
-                                 EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
-                        <Columns>
-                            <PropertyColumn Property="p => p.Id"/>
-                            <PropertyColumn Property="p => p.Name"/>
-                            <PropertyColumn Property="p => p.Description"/>
-                            <PropertyColumn Property="p => p.Type"/>
-                            <PropertyColumn Property="p => p.Url"/>
-                            <TemplateColumn >
-                                <CellTemplate>
-                                    <MudIconButton OnClick="() => RemoveProjectItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
-                                    <MudIconButton OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
-                                </CellTemplate>
-                            </TemplateColumn>
-                        </Columns>
-                    </MudDataGrid>
-                </MudPaper>
-            </MudItem>
-            <MudItem xs="12" sm="6">
-                <MudPaper Elevation="2" Class="pa-4"></MudPaper>
-            </MudItem>
-        </MudGrid>
-    </MudContainer>
+<MudStack Row="true">
+    <MudButton Color="Color.Primary" Href="#">Back</MudButton>
+</MudStack>
+
+<MudContainer Class="mt-16 px-8" MaxWidth="MaxWidth.False">
+    <MudGrid>
+        <MudItem xs="12" sm="6">
+            <MudPaper Elevation="2" Class="pa-4">
+                <MudDataGrid T="Project" Items="@_projects" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingProjectItem"
+                             EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h4">Projekt</MudText>
+                        <MudButton @onclick="OpenProjectAddDialogAsync">Lägg till Projekt</MudButton>
+                    </ToolBarContent>
+                    <Columns>
+                        <PropertyColumn Property="p => p.Id"/>
+                        <PropertyColumn Property="p => p.Name"/>
+                        <PropertyColumn Property="p => p.Description"/>
+                        <PropertyColumn Property="p => p.Type"/>
+                        <PropertyColumn Property="p => p.Url"/>
+                        <TemplateColumn >
+                            <CellTemplate>
+                                <MudIconButton OnClick="() => RemoveProjectItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
+                                <MudIconButton OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                </MudDataGrid>
+            </MudPaper>
+        </MudItem>
+        
+        <MudItem xs="12" sm="6">
+            <MudPaper Elevation="2" Class="pa-4">
+                <MudDataGrid T="Competency" Items="@_competencies" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingCompetencyItem"
+                             EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
+                    <ToolBarContent>
+                        <MudText Typo="Typo.h4">Kompetenser</MudText>
+                        <MudButton @onclick="OpenCompetencyAddDialogAsync">Lägg till Kompetens</MudButton>
+                    </ToolBarContent>
+                    <Columns>
+                        <PropertyColumn Property="p => p.Id"/>
+                        <PropertyColumn Property="p => p.Name"/>
+                        <PropertyColumn Property="p => p.CompetencyLevel"/>
+                        <PropertyColumn Property="p => p.YearsOfExperience"/>
+                        <TemplateColumn >
+                            <CellTemplate>
+                                <MudIconButton OnClick="() => RemoveCompetencyItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
+                                <MudIconButton OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
+                            </CellTemplate>
+                        </TemplateColumn>
+                    </Columns>
+                </MudDataGrid>
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</MudContainer>
+
+<AddProjectDialog/>
+<AddCompetencyDialog/>
+
 
 
 @code {
-    private IEnumerable<Competency> _competencies = new List<Competency>();
-    private IEnumerable<Project> _projects = new List<Project>();
-    
+    private ObservableCollection<Competency> _competencies = new ObservableCollection<Competency>();
+    private ObservableCollection<Project> _projects = new ObservableCollection<Project>();
+
+
+    private Project newProject = new Project();
+
+    private Competency newCompetency = new Competency();
 
     protected override async Task OnInitializedAsync()
     {
-        _competencies = await httpClient.GetFromJsonAsync<List<Competency>>("api/competencies");
-        _projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+        await LoadCompetenciesAsync();
+        await LoadProjectsAsync();
     }
 
     private async Task RemoveProjectItem(Project project)
     {
-        var respone = await httpClient.DeleteAsync($"api/project/{project.Id}");
-        _projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+        var respone = await HttpClient.DeleteAsync($"api/project/{project.Id}");
+        await LoadProjectsAsync();
     }
 
 
     void CommitedEditingProjectItem(Project project)
     {
-        var task = Task.Run(async () => await SendProjectPutRequest(project));
+        var task = Task.Run(async () => await SendProjectPutRequestAsync(project));
     }
 
-    async Task SendProjectPutRequest(Project project)
+    async Task SendProjectPutRequestAsync(Project project)
     {
-        var response = await httpClient.PutAsJsonAsync<Project>($"api/project/{project.Id}", project);
+        var response = await HttpClient.PutAsJsonAsync<Project>($"api/project/{project.Id}", project);
+    }
+
+    private async Task OpenProjectAddDialogAsync()
+    {
+        var dialog = await DialogService.ShowAsync<AddProjectDialog>("Lägg till projekt");
+        var result = await dialog.Result;
+        await LoadProjectsAsync();
     }
     
+    private async Task LoadProjectsAsync()
+    {
+        _projects = await HttpClient.GetFromJsonAsync<ObservableCollection<Project>>("api/projects");
+    }
+
+    
+
+    private async Task LoadCompetenciesAsync()
+    {
+        _competencies = await HttpClient.GetFromJsonAsync<ObservableCollection<Competency>>("api/competencies");
+    }
+
+    private async Task RemoveCompetencyItem(Competency competency)
+    {
+        var respone = await HttpClient.DeleteAsync($"api/competency/{competency.Id}");
+        await LoadCompetenciesAsync();
+    }
+
+    void CommitedEditingCompetencyItem(Competency competency)
+    {
+        var task = Task.Run(async () => await SendCompetencyPutRequestAsync(competency));
+    }
+
+    async Task SendCompetencyPutRequestAsync(Competency competency)
+    {
+        var response = await HttpClient.PutAsJsonAsync<Competency>($"api/competency/{competency.Id}", competency);
+    }
+
+    private async Task OpenCompetencyAddDialogAsync()
+    {
+        var dialog = await DialogService.ShowAsync<AddCompetencyDialog>("Lägg till Kompetens");
+        var result = await dialog.Result;
+        await LoadCompetenciesAsync();
+    }
+
+
+    private async Task OnValidCompetenencySubmitAsync()
+    {
+        var response = HttpClient.PostAsJsonAsync<Competency>($"api/competency", newCompetency);
+        _competencies.Add(newCompetency);
+        await LoadCompetenciesAsync();
+    }
+
 }

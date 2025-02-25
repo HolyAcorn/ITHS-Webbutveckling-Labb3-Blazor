@@ -27,9 +27,6 @@
   <ItemGroup>
     <Content Remove="wwwroot\img\web-dev-icon-6.jpg" />
     <Content Remove="wwwroot\img\app-image.png" />
-    <Resource Include="wwwroot\img\app-image.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
     <Content Remove="wwwroot\img\blazor-logo.png" />
     <Resource Include="wwwroot\img\blazor-logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -40,6 +37,14 @@
     </Resource>
     <Content Remove="wwwroot\img\html.png" />
     <Resource Include="wwwroot\img\html.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Remove="wwwroot\img\Godot_icon.svg.png" />
+    <Resource Include="wwwroot\img\Godot_icon.svg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Content Remove="wwwroot\img\unity.png" />
+    <Resource Include="wwwroot\img\unity.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>

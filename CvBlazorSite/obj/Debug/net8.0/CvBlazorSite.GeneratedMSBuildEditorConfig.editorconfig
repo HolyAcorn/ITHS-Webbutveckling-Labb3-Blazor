@@ -175,6 +175,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBY2NvdW50XFNoYXJlZFxTdGF0dXNNZXNzYWdlLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/AddCompetencyDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBZGRDb21wZXRlbmN5RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/AddProjectDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBZGRQcm9qZWN0RGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/App.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xBcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
@@ -201,6 +209,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQYWdlc1xIb21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/ProjectCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQcm9qZWN0Q2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Routes.razor]

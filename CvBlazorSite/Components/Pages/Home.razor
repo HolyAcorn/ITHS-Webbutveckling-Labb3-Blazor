@@ -6,17 +6,25 @@
 
 <MudGrid Class="title" Justify="Justify.SpaceBetween">
     <MudItem xs="8">
-        <MudText Class="TitleH1" Typo="Typo.h1" GutterBottom="true">VIKTOR</MudText>
+        <Animation Effect="@Effect.BounceInLeft" Speed="@TimeSpan.FromMilliseconds(1000)">
+            <MudText Class="TitleH1" Typo="Typo.h1" GutterBottom="true">VIKTOR</MudText>
+        </Animation>
     </MudItem>
     <MudItem>
-        <MudText Class="TitleH2" Color="Color.Secondary" Typo="Typo.h2" Align="Align.Right" GutterBottom="true">DEVOPS</MudText>
+        <Animation Effect="@Effect.FadeInUp" Speed="@TimeSpan.FromMilliseconds(1500)" Delay="@TimeSpan.FromMilliseconds(750)">
+            <MudText Class="TitleH2" Color="Color.Secondary" Typo="Typo.h2" Align="Align.Right" GutterBottom="true">DEVOPS</MudText>
+        </Animation>
     </MudItem>
 
     <MudItem>
-        <MudText Class="TitleH2" Color="Color.Secondary" Typo="Typo.h2" GutterBottom="true">ENGINEER</MudText>
+        <Animation Effect="@Effect.FadeInDown" Speed="@TimeSpan.FromMilliseconds(1750)" Delay="@TimeSpan.FromMilliseconds(750)">
+            <MudText Class="TitleH2" Color="Color.Secondary" Typo="Typo.h2" GutterBottom="true">ENGINEER</MudText>
+        </Animation>
     </MudItem>
     <MudItem>
-        <MudText Class="TitleH1" Typo="Typo.h1" Align="Align.Right" GutterBottom="true">EDÉN</MudText>
+        <Animation Effect="@Effect.BounceInRight" Speed="@TimeSpan.FromMilliseconds(1250)">
+            <MudText Class="TitleH1" Typo="Typo.h1" Align="Align.Right" GutterBottom="true">EDÉN</MudText>
+        </Animation>
     </MudItem>
 </MudGrid>
 
@@ -36,34 +44,15 @@
 <MudPaper Class="siteBlock" Style="margin-top: 4rem;" Elevation="3">
     <MudText Typo="Typo.h5">Projekt</MudText>
 
-<MudContainer Style="margin-top: 2rem;">
+    <MudContainer Style="margin-top: 2rem;">
 
-    <MudGrid Justify="Justify.Center">
-        @foreach (Project project in _projects)
-        {
-            <MudItem xs="12" lg="5">
-                <MudCard Elevation="5" Style="height: 100%">
-                    <MudCardHeader>
-                        <CardHeaderAvatar>
-                            <MudAvatar Variant="Variant.Outlined">
-                                <MudImage Src="@ProjectHelper.GetImagePath(project.Type)"/>
-                            </MudAvatar>
-                        </CardHeaderAvatar>
-                        <CardHeaderContent>
-                            <MudText Typo="Typo.h5">@project.Name</MudText>
-                        </CardHeaderContent>
-                    </MudCardHeader>
-                    <MudCardContent>
-                        <MudText Typo="Typo.body1">@project.Description</MudText>
-                    </MudCardContent>
-                    <MudCardActions>
-                        <MudButton Variant="Variant.Text" Color="Color.Primary" Href="@project.Url">Github</MudButton>
-                    </MudCardActions>
-                </MudCard>
-            </MudItem>
-        }
-    </MudGrid>
-</MudContainer>
+        <MudGrid Justify="Justify.Center">
+            @foreach (Project project in _projects)
+            {
+                <ProjectCard Project="@project"/>
+            }
+        </MudGrid>
+    </MudContainer>
 </MudPaper>
 
 
@@ -75,7 +64,8 @@
     protected override async Task OnInitializedAsync()
     {
         _competencies = await httpClient.GetFromJsonAsync<List<Competency>>("api/competencies");
-        _projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+        var projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+        _projects = projects.OrderBy(p => p.StartYear).Reverse();
     }
 
 }
