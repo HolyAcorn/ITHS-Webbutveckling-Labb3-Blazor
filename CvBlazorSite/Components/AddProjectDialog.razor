@@ -17,6 +17,7 @@
                 </MudCardContent>
                 <MudCardActions>
                     <MudButton OnClick="async () => await Submit()" Disabled="@(!success)" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Lägg till</MudButton>
+                    <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Avbryt</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudForm>
@@ -43,4 +44,6 @@
             MudDialog.Close(DialogResult.Ok(true));
         }
     }
+
+    private void Cancel() => MudDialog.Cancel();
 }

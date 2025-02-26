@@ -19,17 +19,17 @@
     <MudGrid>
         <MudItem xs="12" sm="6">
             <MudPaper Elevation="2" Class="pa-4">
-                <MudDataGrid T="Project" Items="@_projects" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingProjectItem"
+                <MudDataGrid Dense="true" Breakpoint="Breakpoint.None" T="Project" Items="@_projects" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingProjectItem"
                              EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h4">Projekt</MudText>
-                        <MudButton @onclick="OpenProjectAddDialogAsync">Lägg till Projekt</MudButton>
+                        <MudText Style="margin-right: 1rem" Typo="Typo.h4">Projekt</MudText>
+                        <MudButton @onclick="OpenProjectAddDialogAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Lägg till Projekt</MudButton>
                     </ToolBarContent>
                     <Columns>
-                        <PropertyColumn Property="p => p.Id"/>
-                        <PropertyColumn Property="p => p.Name"/>
-                        <PropertyColumn Property="p => p.Description"/>
-                        <PropertyColumn Property="p => p.Type"/>
+                        <PropertyColumn Property="p => p.Id" />
+                        <PropertyColumn Property="p => p.Name" Title="Namn"/>
+                        <PropertyColumn Property="p => p.Description" Title="Beskrivning"/>
+                        <PropertyColumn Property="p => p.Type" Title="Typ"/>
                         <PropertyColumn Property="p => p.Url"/>
                         <TemplateColumn >
                             <CellTemplate>
@@ -44,17 +44,17 @@
         
         <MudItem xs="12" sm="6">
             <MudPaper Elevation="2" Class="pa-4">
-                <MudDataGrid T="Competency" Items="@_competencies" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingCompetencyItem"
+                <MudDataGrid Dense="true" Breakpoint="Breakpoint.None" T="Competency" Items="@_competencies" EditMode="DataGridEditMode.Form" CommittedItemChanges="@CommitedEditingCompetencyItem"
                              EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
                     <ToolBarContent>
-                        <MudText Typo="Typo.h4">Kompetenser</MudText>
-                        <MudButton @onclick="OpenCompetencyAddDialogAsync">Lägg till Kompetens</MudButton>
+                        <MudText Style="margin-right: 1rem" Typo="Typo.h4">Skills</MudText>
+                        <MudButton @onclick="OpenCompetencyAddDialogAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Lägg till Skill</MudButton>
                     </ToolBarContent>
                     <Columns>
                         <PropertyColumn Property="p => p.Id"/>
-                        <PropertyColumn Property="p => p.Name"/>
-                        <PropertyColumn Property="p => p.CompetencyLevel"/>
-                        <PropertyColumn Property="p => p.YearsOfExperience"/>
+                        <PropertyColumn Property="p => p.Name" Title="Namn"/>
+                        <PropertyColumn Property="p => p.CompetencyLevel" Title="Nivå"/>
+                        <PropertyColumn Property="p => p.YearsOfExperience" Title="År"/>
                         <TemplateColumn >
                             <CellTemplate>
                                 <MudIconButton OnClick="() => RemoveCompetencyItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
@@ -70,7 +70,7 @@
 
 <AddProjectDialog/>
 <AddCompetencyDialog/>
-
+<RemoveItemDialog/>
 
 
 @code {
@@ -90,6 +90,12 @@
 
     private async Task RemoveProjectItem(Project project)
     {
+        var parameters = new DialogParameters<RemoveItemDialog> {{x => x.Name, project.Name}};
+        var dialog = await DialogService.ShowAsync<RemoveItemDialog>($"Är du säker på att du vill ta bort projektet {project.Name}");
+        var result = await dialog.Result;
+
+        if (result.Canceled) return;
+        
         var respone = await HttpClient.DeleteAsync($"api/project/{project.Id}");
         await LoadProjectsAsync();
     }
@@ -126,6 +132,12 @@
 
     private async Task RemoveCompetencyItem(Competency competency)
     {
+        var parameters = new DialogParameters<RemoveItemDialog> {{x => x.Name, competency.Name}};
+        var dialog = await DialogService.ShowAsync<RemoveItemDialog>($"Är du säker på att du vill ta bort projektet {competency.Name}");
+        var result = await dialog.Result;
+
+        if (result.Canceled) return;
+        
         var respone = await HttpClient.DeleteAsync($"api/competency/{competency.Id}");
         await LoadCompetenciesAsync();
     }

@@ -215,6 +215,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xQcm9qZWN0Q2FyZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/RemoveItemDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSZW1vdmVJdGVtRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [V:/cSharp/ITHS/Webbutveckling/Labb 3/CvBlazorSite/CvBlazorSite/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50c1xSb3V0ZXMucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
