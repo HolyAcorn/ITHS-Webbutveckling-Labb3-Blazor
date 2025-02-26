@@ -20,33 +20,27 @@
 
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\" />
+    <Content Remove="wwwroot\img\web-dev-icon-6.jpg" />
+    <Content Remove="wwwroot\img\app-image.png" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Content Remove="wwwroot\img\web-dev-icon-6.jpg" />
-    <Content Remove="wwwroot\img\app-image.png" />
-    <Content Remove="wwwroot\img\blazor-logo.png" />
-    <Resource Include="wwwroot\img\blazor-logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Content Remove="wwwroot\img\C Sharp logo.svg" />
-    <Resource Include="wwwroot\img\C Sharp logo.svg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Content Remove="wwwroot\img\html.png" />
-    <Resource Include="wwwroot\img\html.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Content Remove="wwwroot\img\Godot_icon.svg.png" />
-    <Resource Include="wwwroot\img\Godot_icon.svg.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Content Remove="wwwroot\img\unity.png" />
-    <Resource Include="wwwroot\img\unity.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
+    <Content Update="wwwroot\img\blazor-logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\C Sharp logo.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\Godot_icon.svg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\html.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\img\unity.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

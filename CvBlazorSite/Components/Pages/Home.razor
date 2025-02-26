@@ -3,11 +3,11 @@
 @inject IHttpClientFactory ClientFactory
 
 
-<PageTitle>Home</PageTitle>
+<PageTitle>Viktor Edén</PageTitle>
 
 <MudGrid Class="title" Justify="Justify.SpaceBetween">
     <MudItem xs="8">
-        <Animation Effect="@Effect.BounceInLeft" Speed="@TimeSpan.FromMilliseconds(1000)">
+        <Animation Effect="@Effect.BounceInLeft" Speed="@TimeSpan.FromMilliseconds(1000)" Delay="@TimeSpan.FromMilliseconds(10)">
             <MudText Class="TitleH1" Typo="Typo.h1" GutterBottom="true">VIKTOR</MudText>
         </Animation>
     </MudItem>
@@ -23,7 +23,7 @@
         </Animation>
     </MudItem>
     <MudItem>
-        <Animation Effect="@Effect.BounceInRight" Speed="@TimeSpan.FromMilliseconds(1250)">
+        <Animation Effect="@Effect.BounceInRight" Speed="@TimeSpan.FromMilliseconds(1250)" Delay="@TimeSpan.FromMilliseconds(10)">
             <MudText Class="TitleH1" Typo="Typo.h1" Align="Align.Right" GutterBottom="true">EDÉN</MudText>
         </Animation>
     </MudItem>

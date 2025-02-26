@@ -159,3 +159,8 @@ V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\
 V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\ref\CvBlazorSite.dll
 V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\BlazorAnimation.dll
 V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\obj\Debug\net8.0\CvBlazorSite.sourcelink.json
+V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\wwwroot\img\blazor-logo.png
+V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\wwwroot\img\C Sharp logo.svg
+V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\wwwroot\img\Godot_icon.svg.png
+V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\wwwroot\img\html.png
+V:\cSharp\ITHS\Webbutveckling\Labb 3\CvBlazorSite\CvBlazorSite\bin\Debug\net8.0\wwwroot\img\unity.png
