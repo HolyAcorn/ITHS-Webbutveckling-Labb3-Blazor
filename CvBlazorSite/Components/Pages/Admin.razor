@@ -23,7 +23,7 @@
                              EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
                     <ToolBarContent>
                         <MudText Style="margin-right: 1rem" Typo="Typo.h4">Projekt</MudText>
-                        <MudButton @onclick="OpenProjectAddDialogAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Lägg till Projekt</MudButton>
+                        <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "addProjectButton"}})" @onclick="OpenProjectAddDialogAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Lägg till Projekt</MudButton>
                     </ToolBarContent>
                     <Columns>
                         <PropertyColumn Property="p => p.Id" />
@@ -33,8 +33,8 @@
                         <PropertyColumn Property="p => p.Url"/>
                         <TemplateColumn >
                             <CellTemplate>
-                                <MudIconButton OnClick="() => RemoveProjectItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
-                                <MudIconButton OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
+                                <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "removeProjectButton_" + context.Item.Id}})" OnClick="() => RemoveProjectItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
+                                <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "editProjectButton_" + context.Item.Id}})" OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
                             </CellTemplate>
                         </TemplateColumn>
                     </Columns>
@@ -48,7 +48,7 @@
                              EditTrigger="DataGridEditTrigger.Manual" ReadOnly="false">
                     <ToolBarContent>
                         <MudText Style="margin-right: 1rem" Typo="Typo.h4">Skills</MudText>
-                        <MudButton @onclick="OpenCompetencyAddDialogAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Lägg till Skill</MudButton>
+                        <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "addSkillButton"}})" @onclick="OpenCompetencyAddDialogAsync" Variant="Variant.Filled" Color="Color.Primary" Size="Size.Small">Lägg till Skill</MudButton>
                     </ToolBarContent>
                     <Columns>
                         <PropertyColumn Property="p => p.Id"/>
@@ -57,8 +57,8 @@
                         <PropertyColumn Property="p => p.YearsOfExperience" Title="År"/>
                         <TemplateColumn >
                             <CellTemplate>
-                                <MudIconButton OnClick="() => RemoveCompetencyItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
-                                <MudIconButton OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
+                                <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "removeSkillButton_" + context.Item.Id}})" OnClick="() => RemoveCompetencyItem(context.Item)" Size="Size.Small" Icon="@Icons.Material.Outlined.Remove" Variant="Variant.Outlined"/>
+                                <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "editSkillButton_" + context.Item.Id}})" OnClick="@context.Actions.StartEditingItemAsync" Size="Size.Small" Icon="@Icons.Material.Outlined.Draw" Variant="Variant.Outlined"/>
                             </CellTemplate>
                         </TemplateColumn>
                     </Columns>

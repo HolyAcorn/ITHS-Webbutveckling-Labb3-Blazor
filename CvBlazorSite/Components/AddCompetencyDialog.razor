@@ -15,8 +15,8 @@
                     <MudTextField Label="Antal års erfarenhet" InputType="InputType.Number" @bind-value="model.YearsOfExperience" For="(() => model.YearsOfExperience)" Required="true" RequiredError="Antal år krävs"/>
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton OnClick="async () => await Submit()" Disabled="@(!success)" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Lägg till</MudButton>
-                    <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Avbryt</MudButton>
+                    <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "addSkillDialogButton"}})" OnClick="async () => await Submit()" Disabled="@(!success)" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Lägg till</MudButton>
+                    <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "cancelSkillDialogButton"}})" OnClick="Cancel" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Avbryt</MudButton>
                     
                 </MudCardActions>
             </MudCard>

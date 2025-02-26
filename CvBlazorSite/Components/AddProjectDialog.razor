@@ -16,8 +16,8 @@
                     
                 </MudCardContent>
                 <MudCardActions>
-                    <MudButton OnClick="async () => await Submit()" Disabled="@(!success)" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Lägg till</MudButton>
-                    <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Avbryt</MudButton>
+                    <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "addProjectDialogButton"}})" OnClick="async () => await Submit()" Disabled="@(!success)" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Lägg till</MudButton>
+                    <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "cancelProjectDialogButton"}})" OnClick="Cancel" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Avbryt</MudButton>
                 </MudCardActions>
             </MudCard>
         </MudForm>

@@ -33,8 +33,8 @@
 <MudPaper Class="siteBlock" Elevation="3">
     <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
 
-        <MudIconButton Href="https://www.linkedin.com/in/viktor-ed%C3%A9n-52b12626b/" Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Primary"/>
-        <MudIconButton Href="https://github.com/HolyAcorn" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary"/>
+        <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "linkedInButton"}})" Href="https://www.linkedin.com/in/viktor-ed%C3%A9n-52b12626b/" Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Primary"/>
+        <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "githubButton"}})" Href="https://github.com/HolyAcorn" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary"/>
     </MudStack>
 </MudPaper>
 

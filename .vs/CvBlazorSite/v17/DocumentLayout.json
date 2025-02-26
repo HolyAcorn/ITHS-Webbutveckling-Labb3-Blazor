@@ -48,15 +48,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "CvBlazorSite",
+              "Title": "CvBlazorSite.csproj",
               "DocumentMoniker": "V:\\cSharp\\ITHS\\Webbutveckling\\Labb 3\\CvBlazorSite\\CvBlazorSite\\CvBlazorSite.csproj",
               "RelativeDocumentMoniker": "CvBlazorSite\\CvBlazorSite.csproj",
               "ToolTip": "V:\\cSharp\\ITHS\\Webbutveckling\\Labb 3\\CvBlazorSite\\CvBlazorSite\\CvBlazorSite.csproj",
               "RelativeToolTip": "CvBlazorSite\\CvBlazorSite.csproj",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-02-26T13:14:09.552Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T13:14:09.552Z"
             },
             {
               "$type": "Document",
@@ -68,8 +67,7 @@
               "RelativeToolTip": "CvBlazorSite\\Components\\ProjectCard.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-26T13:09:27.324Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T13:09:27.324Z"
             },
             {
               "$type": "Document",
@@ -81,8 +79,7 @@
               "RelativeToolTip": "CvBlazorSite\\Program.cs",
               "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAACPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T13:04:26.352Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T13:04:26.352Z"
             },
             {
               "$type": "Document",
@@ -94,8 +91,7 @@
               "RelativeToolTip": "CvBlazorSite\\Components\\Layout\\MainLayout.razor",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-02-20T14:05:02.57Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-20T14:05:02.57Z"
             }
           ]
         }

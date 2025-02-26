@@ -26,19 +26,19 @@
         <MudStack Row="true" Justify="Justify.SpaceBetween">
             <MudStack Row="true">
 
-                <MudButton Href="Admin" Color="Color.Primary">Admin</MudButton>
+                <MudButton UserAttributes="@(new Dictionary<string, object?>{{"id", "adminLoginButton"}})" Href="Admin" Color="Color.Primary">Admin</MudButton>
                 <AuthorizeView>
                     <form action="Account/Logout" method="post">
                         <AntiforgeryToken/>
                         <input type="hidden" name="ReturnUrl" value="@currentUrl"/>
-                        <button type="submit" class="mud-nav-link mud-ripple">
+                        <button id="adminLogOutButton" type="submit" class="mud-nav-link mud-ripple">
                             <MudText Color="Color.Primary">Logout</MudText>
                         </button>
                     </form>
 
                 </AuthorizeView>
             </MudStack>
-            <MudIconButton Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
+            <MudIconButton UserAttributes="@(new Dictionary<string, object?>{{"id", "darkModeButton"}})" Icon="@(DarkLightModeButtonIcon)" Color="Color.Inherit" OnClick="@DarkModeToggle"/>
         </MudStack>
     </MudMainContent>
 
