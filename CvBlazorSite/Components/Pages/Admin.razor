@@ -3,7 +3,7 @@
 @using CvBlazorSite.Models
 @using Microsoft.AspNetCore.Authorization
 @using System.ComponentModel.DataAnnotations
-@inject HttpClient HttpClient
+@inject IHttpClientFactory ClientFactory
 @inject IDialogService DialogService
 
 
@@ -95,8 +95,8 @@
         var result = await dialog.Result;
 
         if (result.Canceled) return;
-        
-        var respone = await HttpClient.DeleteAsync($"api/project/{project.Id}");
+        var client = ClientFactory.CreateClient("CvAPI");
+        var respone = await client.DeleteAsync($"api/project/{project.Id}");
         await LoadProjectsAsync();
     }
 
@@ -108,7 +108,8 @@
 
     async Task SendProjectPutRequestAsync(Project project)
     {
-        var response = await HttpClient.PutAsJsonAsync<Project>($"api/project/{project.Id}", project);
+        var client = ClientFactory.CreateClient("CvAPI");
+        var response = await client.PutAsJsonAsync<Project>($"api/project/{project.Id}", project);
     }
 
     private async Task OpenProjectAddDialogAsync()
@@ -120,14 +121,16 @@
     
     private async Task LoadProjectsAsync()
     {
-        _projects = await HttpClient.GetFromJsonAsync<ObservableCollection<Project>>("api/projects");
+        var client = ClientFactory.CreateClient("CvAPI");
+        _projects = await client.GetFromJsonAsync<ObservableCollection<Project>>("api/projects");
     }
 
     
 
     private async Task LoadCompetenciesAsync()
     {
-        _competencies = await HttpClient.GetFromJsonAsync<ObservableCollection<Competency>>("api/competencies");
+        var client = ClientFactory.CreateClient("CvAPI");
+        _competencies = await client.GetFromJsonAsync<ObservableCollection<Competency>>("api/competencies");
     }
 
     private async Task RemoveCompetencyItem(Competency competency)
@@ -137,8 +140,8 @@
         var result = await dialog.Result;
 
         if (result.Canceled) return;
-        
-        var respone = await HttpClient.DeleteAsync($"api/competency/{competency.Id}");
+        var client = ClientFactory.CreateClient("CvAPI");
+        var respone = await client.DeleteAsync($"api/competency/{competency.Id}");
         await LoadCompetenciesAsync();
     }
 
@@ -149,7 +152,8 @@
 
     async Task SendCompetencyPutRequestAsync(Competency competency)
     {
-        var response = await HttpClient.PutAsJsonAsync<Competency>($"api/competency/{competency.Id}", competency);
+        var client = ClientFactory.CreateClient("CvAPI");
+        var response = await client.PutAsJsonAsync<Competency>($"api/competency/{competency.Id}", competency);
     }
 
     private async Task OpenCompetencyAddDialogAsync()
@@ -160,11 +164,5 @@
     }
 
 
-    private async Task OnValidCompetenencySubmitAsync()
-    {
-        var response = HttpClient.PostAsJsonAsync<Competency>($"api/competency", newCompetency);
-        _competencies.Add(newCompetency);
-        await LoadCompetenciesAsync();
-    }
 
 }

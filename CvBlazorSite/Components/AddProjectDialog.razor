@@ -1,5 +1,5 @@
 ﻿@using CvBlazorSite.Models
-@inject HttpClient HttpClient
+@inject IHttpClientFactory ClientFactory
 
 <MudDialog>
     <DialogContent>
@@ -40,7 +40,8 @@
 
         if (form.IsValid)
         {
-            var response = HttpClient.PostAsJsonAsync<Project>($"api/project", model);
+            var client = ClientFactory.CreateClient("CvAPI");
+            var response = client.PostAsJsonAsync<Project>($"api/project", model);
             MudDialog.Close(DialogResult.Ok(true));
         }
     }

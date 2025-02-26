@@ -89,10 +89,6 @@
 
     protected override async Task OnInitializedAsync()
     {
-        /*
-        _competencies = await httpClient.GetFromJsonAsync<List<Competency>>("api/competencies");
-        var projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");*/
-
         var client = ClientFactory.CreateClient("CvAPI");
         _competencies = await client.GetFromJsonAsync<List<Competency>>("api/competencies");
         var projects = await client.GetFromJsonAsync<List<Project>>("api/projects");
