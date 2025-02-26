@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using CvBlazorSite.Models
-@inject HttpClient httpClient
+@inject IHttpClientFactory ClientFactory
+
 
 <PageTitle>Home</PageTitle>
 
@@ -27,6 +28,15 @@
         </Animation>
     </MudItem>
 </MudGrid>
+
+
+<MudPaper Class="siteBlock" Elevation="3">
+    <MudStack Row="true" AlignItems="AlignItems.Center" Justify="Justify.Center">
+
+        <MudIconButton Href="https://www.linkedin.com/in/viktor-ed%C3%A9n-52b12626b/" Icon="@Icons.Custom.Brands.LinkedIn" Color="Color.Primary"/>
+        <MudIconButton Href="https://github.com/HolyAcorn" Icon="@Icons.Custom.Brands.GitHub" Color="Color.Primary"/>
+    </MudStack>
+</MudPaper>
 
 <MudPaper Class="siteBlock" Elevation="3">
     <MudText Typo="Typo.h5">Skills</MudText>
@@ -56,16 +66,46 @@
 </MudPaper>
 
 
+<MudPaper Class="siteBlock" Style="margin-top: 4rem;" Elevation="3">
+    <MudStack>
+
+        <MudText Typo="Typo.h5">Web API Produkter</MudText>
+        <MudText>Här kan du se produkter från webb API-projektet jag gjorde</MudText>
+        <MudDataGrid Items="@_products" Dense="true" Breakpoint="Breakpoint.None">
+            <Columns>
+                <PropertyColumn Property="p => p.ProductName"/>
+                <PropertyColumn Property="p => p.Stock"/>
+                <PropertyColumn Property="p => p.PriceSEK"/>
+            </Columns>
+        </MudDataGrid>
+    </MudStack>
+</MudPaper>
+
 @code
 {
     private IEnumerable<Competency> _competencies = new List<Competency>();
     private IEnumerable<Project> _projects = new List<Project>();
+    private IEnumerable<Product> _products = new List<Product>();
 
     protected override async Task OnInitializedAsync()
     {
+        /*
         _competencies = await httpClient.GetFromJsonAsync<List<Competency>>("api/competencies");
-        var projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");
+        var projects = await httpClient.GetFromJsonAsync<List<Project>>("api/projects");*/
+
+        var client = ClientFactory.CreateClient("CvAPI");
+        _competencies = await client.GetFromJsonAsync<List<Competency>>("api/competencies");
+        var projects = await client.GetFromJsonAsync<List<Project>>("api/projects");
+
+
         _projects = projects.OrderBy(p => p.StartYear).Reverse();
+        
+        client = ClientFactory.CreateClient("ProductsAPI");
+
+        _products = await client.GetFromJsonAsync<List<Product>>("api/products");
     }
+
+    record Product(string Id, string ProductName, int Stock, double PriceSEK, double PriceUSD, double PriceEUR);
+    
 
 }

@@ -46,7 +46,9 @@ namespace CvBlazorSite
 
             builder.Services.AddSingleton<IEmailSender<ApplicationUser>, IdentityNoOpEmailSender>();
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7032/") });
+            //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(Environment.GetEnvironmentVariable("WebApiConnection")) });
+            builder.Services.AddHttpClient("CvAPI", client => client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("WebApiConnection")));
+            builder.Services.AddHttpClient("ProductsAPI", client => client.BaseAddress = new Uri(Environment.GetEnvironmentVariable("ProductConnection")));
             
             
             var app = builder.Build();
